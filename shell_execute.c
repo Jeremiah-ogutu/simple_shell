@@ -1,6 +1,6 @@
 #include "shell.h"
 
-void execute_prompt(const char *outPut)
+void execute_prompt(const char *text)
 {
 	pid_t childPid = fork();
 
@@ -12,7 +12,7 @@ void execute_prompt(const char *outPut)
 	else if 
 		(childPid == 0)
 		{
-			execlp(outPut, ooutPut, (char *)NULL);
+			execlp(text, text, (char *)NULL);
 			perror("exclp");
 			exit(EXIT_FAILURE);
 		}

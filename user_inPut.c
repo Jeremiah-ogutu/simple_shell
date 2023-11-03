@@ -1,8 +1,8 @@
 #include "shell.h"
 
-void user_inPut(char *inPut, size_t size)
+void user_inPut(char *text, size_t size)
 {
-	if (fgets(inPut, size, stdin) == NULL)
+	if (fgets(text, size, stdin) == NULL)
 	{
 		if (feof(stdin))
 		{
@@ -16,5 +16,5 @@ void user_inPut(char *inPut, size_t size)
 		}
 	}
 
-	inPut[strcspn(inPut, "\n")] = '\0';
+	text[strcspn(text, "\n")] = '\0';
 }
