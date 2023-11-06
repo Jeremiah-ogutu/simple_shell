@@ -11,7 +11,7 @@ void executing_text(const char *text)
 	}
 	else if (child_pid == 0)
 	{
-		execve(text, text, (char *)NULL);
+		execlp(text, text, (char *)NULL);
 		perror("execlp");
 		exit(EXIT_FAILURE);
 	}

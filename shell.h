@@ -4,9 +4,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdlib.h>
+#include <sys/wait.h>
 
-void jerlis_print(const char *special_printf)
-void unveil_prompt(void)
-void executing_text(const char *text)
+
+void jerlis_print(const char *special_printf);
+void unveil_prompt(void);
+void executing_text(const char *text);
+void input_text(char *text, size_t size);
 
 #endif

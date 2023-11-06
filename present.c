@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /*
- * unveil_prompt - the root function
+ * unveil_prompt - promt to be displayed
 */
 
 void unveil_prompt(void)
