@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+<<<<<<< HEAD
 #include <stdlib.h>
 #include <stdbool.h>
 #include <sys/types.h>
@@ -16,5 +17,10 @@ void user_inPut(char *text, size_t size);
 
 
 
+=======
+
+void jerlis_print(const char *special_printf)
+void unveil_prompt(void)
+>>>>>>> refs/remotes/origin/main
 
 #endif

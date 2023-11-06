@@ -2,6 +2,7 @@
 
 int main(void)
 {
+<<<<<<< HEAD
 	char text[150];
 
 	while (true)
@@ -13,4 +14,12 @@ int main(void)
 
 	}
 	return (0);
+=======
+	char command[124];
+
+	while(1)
+	{
+		unveil_prompt();
+	}
+>>>>>>> refs/remotes/origin/main
 }
