@@ -1,5 +1,11 @@
 #include "shell.h"
 
+/**
+ * user_input-fuction that takes the user input
+ * @text- the inputed text
+ * @size- the length
+ */
+
 void user_inPut(char *text, size_t size)
 {
 	if (fgets(text, size, stdin) == NULL)
