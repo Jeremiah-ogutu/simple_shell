@@ -11,8 +11,20 @@ void executing_text(const char *text)
 	}
 	else if (child_pid == 0)
 	{
-		execlp(text, text, (char *)NULL);
-		perror("execlp");
+		char *text_args[150];
+		int args_count = 0;
+
+		char *token = strtok((char *)text, " ");
+		while (token != NULL)
+		{
+			text_args[args_count++] = token;
+			token = strtok(NULL, " ");
+		}
+		text_args[args_count] = NULL;
+
+		execvp(text_args[0], text_args);
+		perror("execvp");
+
 		exit(EXIT_FAILURE);
 	}
 	else
