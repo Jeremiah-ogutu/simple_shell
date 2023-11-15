@@ -1,28 +1,27 @@
 #include "shell.h"
-
 /**
-  * executing_text - Execute a command.
-  * @cp: The name of the command.
-  * @command: arrays of pointers
-  * Return: 0 (success)
-  */
-void executing_text(char *cp, char **command)
-{
-	pid_t child_pid;
-	int status;
-	char **env = environ;
+* executing_text - fuction that execute command
+* @command:the command to be executed
+* @arguments:the txt in the function
+*/
 
-	child_pid = fork();
-	if (child_pid < 0)
-		perror(cp);
-	if (child_pid == 0)
+void executing_text(const char *command, char *const arguments[])
+{
+	pid_t child_pid = fork();
+
+	if (child_pid == -1)
 	{
-		execve(cp, command, env);
-		perror(cp);
-		free(cp);
-		free_buffers(command);
-		exit(98);
+		perror("fork");
+		exit(EXIT_FAILURE);
+	}
+	else if (child_pid == 0)
+	{
+		execve(command, arguments, NULL);
+		perror("execve");
+		exit(EXIT_FAILURE);
 	}
 	else
-		wait(&status);
+	{
+		wait(NULL);
+	}
 }
