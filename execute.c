@@ -1,6 +1,6 @@
 #include "shell.h"
 
-void executing_text(const char *text)
+void executing_text(const char *command, char *const arguements[])
 {
 	pid_t child_pid = fork();
 
@@ -11,20 +11,8 @@ void executing_text(const char *text)
 	}
 	else if (child_pid == 0)
 	{
-		char *text_args[150];
-		int args_count = 0;
-
-		char *token = strtok((char *)text, " ");
-		while (token != NULL)
-		{
-			text_args[args_count++] = token;
-			token = strtok(NULL, " ");
-		}
-		text_args[args_count] = NULL;
-
-		execvp(text_args[0], text_args);
-		perror("execvp");
-
+		execve(command, arguements, (char *const)NULL);
+		perror("execve");
 		exit(EXIT_FAILURE);
 	}
 	else
