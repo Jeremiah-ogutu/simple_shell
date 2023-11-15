@@ -1,6 +1,6 @@
 #include "shell.h"
 
-/*
+/**
  * unveil_prompt - promt to be displayed
 */
 
