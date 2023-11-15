@@ -2,39 +2,58 @@
 
 /**
 * executing_text - fuction that execute command
-* @command:the command to be executed
-* @arguments:the txt in the function
+* @text:the command to be executed
+* Return: 0 success
 */
 
-void executing_text(const char *text)
+int executing_text(char (*text)[124])
 {
-pid_t child_pid = fork();
+	pid_t pid;
+	int status;
+	char **argv =malloc(2 * sizeof(char *));
 
-if (child_pid == -1)
-{
-perror("fork");
-exit(EXIT_FAILURE);
-}
-else if (child_pid == 0)
-{
-char *text_args[150];
-int args_count = 0;
+	if (argv == NULL)
+	{
+		perror("malloc");
+		exit(EXIT_FAILURE);
+	}
+	argv[0] = strdup(*text);
+	if (argv[0] == NULL)
+	{
+		perror("strdup");
+		free(argv);
+		exit(EXIT_FAILURE);
+	}
+	argv[1] = NULL;
 
-char *token = strtok((char *)text, " ");
-while (token != NULL)
-{
-text_args[args_count++] = token;
-token = strtok(NULL, " ");
-}
-text_args[args_count] = NULL;
 
-execvp(text_args[0], text_args);
-perror("execvp");
+	pid = fork();
+	if (pid == -1)
+	{
+		perror("fork");
+		exit(EXIT_FAILURE);
+	}
+	else if (pid == 0)
+		{
 
-exit(EXIT_FAILURE);
+		if (execve(*text, argv, NULL) == -1)
+		{
+			perror(*text);
+			exit(EXIT_FAILURE);
+		}
+	}
+	else 
+	{
+		waitpid(pid, &status, 0);
+		if (WIFEXITED(status))
+		{
+			return (WEXITSTATUS(status));
+		}
+		else
+		{
+			return (-1);
+		}
+	}
+	return (-1);
 }
-else
-{
-wait(NULL);
-}
-}
+

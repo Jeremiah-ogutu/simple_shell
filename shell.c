@@ -13,7 +13,7 @@ int main(void)
 	while(1)
 	{
 		unveil_prompt();
-		executing_text(text);
+		executing_text(&text);
 		 input_text(text, sizeof(text));
 	}
 }
