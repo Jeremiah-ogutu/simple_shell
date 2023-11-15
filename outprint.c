@@ -1,5 +1,8 @@
 #include "shell.h"
-
+/**
+ * input_text - tye text to be written
+ * @text:text pointer
+ */
 void input_text(char *text, size_t size)
 {
 	if (fgets(text, size, stdin) == NULL)

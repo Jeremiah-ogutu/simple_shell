@@ -1,4 +1,9 @@
 #include "shell.h"
+/**
+ * main-the starting point
+ *
+ * Return:0 success
+ */
 
 int main(void)
 {
