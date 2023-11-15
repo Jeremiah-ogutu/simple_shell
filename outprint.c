@@ -2,7 +2,6 @@
 /**
  * input_text - tye text to be written
  * @text:text pointer
- * @size:the length of the text
  */
 void input_text(char *text, size_t size)
 {
