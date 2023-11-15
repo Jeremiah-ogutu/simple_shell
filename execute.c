@@ -1,22 +1,28 @@
 #include "shell.h"
 
-void executing_text(const char *text)
+/**
+  * Executor_or - executed commands as entered by the authors
+  * @cp: commands
+  * @cmd: arrays of pointers
+  * Return: 0 (success)
+  */
+void executor_or(char *cp **cmd)
 {
-        pid_t child_pid = fork();
+	pid_t child_pid;
+	int status;
+	char **env = environ;
 
-        if (child_pid == -1)
-        {
-                perror("fork");
-                exit(EXIT_FAILURE);
-        }
-        else if (child_pid == 0)
-        {
-                execve(text, text, (char *)NULL);
-                perror("execve");
-                exit(EXIT_FAILURE);
-        }
-        else
-        {
-                wait(NULL);
-        }
+	child_pid = fork();
+	if (child_pid < 0)
+		perror(cp);
+	if (child_pid == 0)
+	{
+		execve(cp, cmd, env);
+		perror(cp);
+		free(cp);
+		free_buffers(cmd);
+		exit(98);
+	}
+	else
+		wait(&status);
 }
