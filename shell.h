@@ -10,7 +10,7 @@
 
 void jerlis_print(const char *special_printf);
 void unveil_prompt(void);
-void executor_or(char *cp **cmd);
+void executing_text(char *cp **command);;
 void input_text(char *text, size_t size);
 
 #endif

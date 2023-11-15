@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
-  * Executor_or - executed commands as entered by the authors
+  * Executing-text - executes commands as entered by the authors
   * @cp: commands
-  * @cmd: arrays of pointers
+  * @command: arrays of pointers
   * Return: 0 (success)
   */
-void executor_or(char *cp **cmd)
+void executing_text(char *cp **command)
 {
 	pid_t child_pid;
 	int status;
@@ -17,10 +17,10 @@ void executor_or(char *cp **cmd)
 		perror(cp);
 	if (child_pid == 0)
 	{
-		execve(cp, cmd, env);
+		execve(cp, command, env);
 		perror(cp);
 		free(cp);
-		free_buffers(cmd);
+		free_buffers(command);
 		exit(98);
 	}
 	else
