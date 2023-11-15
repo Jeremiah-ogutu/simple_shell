@@ -1,4 +1,8 @@
 #include "shell.h"
+/**
+ * jerlis_print-the fuction to print
+ * @special_printf:this a function performing the printf
+ */
 
 void jerlis_print(const char *special_printf)
 {

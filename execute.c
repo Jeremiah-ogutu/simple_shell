@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
-  * Executing-text - executes commands as entered by the authors
-  * @cp: commands
+  * executing_text - Execute a command.
+  * @cp: The name of the command.
   * @command: arrays of pointers
   * Return: 0 (success)
   */
-void executing_text(char *cp **command)
+void executing_text(char *cp, char **command)
 {
 	pid_t child_pid;
 	int status;
