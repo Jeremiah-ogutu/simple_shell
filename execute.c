@@ -1,27 +1,56 @@
 #include "shell.h"
 /**
-* executing_text - fuction that execute command
-* @command:the command to be executed
-* @arguments:the txt in the function
+ *execute - Execute a command.
+ *
+ * @input: Array of strings representing the command and its arguments.
+ * @strg: String representing the command line input.
+ * @i: Pointer to the increment variable of the main program.
+ * @head: Pointer to the env_t linked list representing environment variables.
+ *
+ * Return:1 sucess else 0
 */
 
-void executing_text(const char *command, char *const arguments[])
+int execute(char **input, char *strg, int *i, env_t **head)
 {
-	pid_t child_pid = fork();
+	struct stat filestat;
+	int status = 0;
+	char *exe = NULL, **env = NULL;
+	pid_t child_pid;
 
+	child_pid = fork();
 	if (child_pid == -1)
 	{
-		perror("fork");
-		exit(EXIT_FAILURE);
+		print_error(i, strg, input);
+		free_everything(input);
+		exit(EXIT_SUCCESS);
 	}
-	else if (child_pid == 0)
+	if (child_pid == 0)
 	{
-		execve(command, arguments, NULL);
-		perror("execve");
-		exit(EXIT_FAILURE);
+		env = list_to_arr(*head);
+		if (get_env_val("PATH=", env)[0] != '/')
+			execve(input[0], input, env);
+		exe = path_finder(input, env);
+		if (!exe && !stat(input[0], &filestat))
+		{
+			if (execve(input[0], input, env) == -1)
+			{
+				print_error(i, strg, input);
+				free_everything(input), free_everything(env);
+				return (0);
+			}
+			free_everything(input);
+			free_everything(env);
+		}
+		if (execve(exe, input, env) == -1)
+		{
+			print_error(i, strg, input);
+			free(exe), free_everything(input), free_everything(env);
+			exit(EXIT_SUCCESS);
+		}
 	}
 	else
-	{
-		wait(NULL);
-	}
+		wait(&status);
+	free_everything(input), free_everything(env);
+	return (1);
 }
+
