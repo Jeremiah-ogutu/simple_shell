@@ -28,9 +28,6 @@ int inbuild_comd(char *text, char *name, char **argv, int *add, env_t **head);
 void sigint_handler(int sig);
 void free_everything(char **args);
 char **parse_line(char *line, int get);
-void unveil_prompt(void);
-<<<<<<< HEAD
-void executing_text(char *cp, **command);n
 void input_text(char *text, size_t size);
 int _strlen(char *string);
 char *_strcopy(char *dest, char *source);
