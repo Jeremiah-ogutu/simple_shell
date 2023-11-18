@@ -1,47 +1,47 @@
 #include "shell.h"
 
 /**
- * sigint_handler - doesn't exit in case of Ctrl-C
- * @sig: required for signal function to run properly
+ * siginter_handlerin - fails to exit in Ctrl-C case
+ * @signal: a signal function is needed to run appropriately
  */
-void sigint_handler(int sig)
+/
+void sigi_handlerin(int signal)
 {
-	(void)sig;
+	(void)signal;
 	 jerlis_print('\n');
 	 unveil_prompt();
 	 fflush(stdout);
 }
 
 /**
- * free_everything - frees arrays of strings
- * @args: array of strings to free
+ * free_everythingg - frees arrays of strings
+ * @args: strings array to be freed 
  */
 void free_everything(char **args)
 {
-	int i;
+	int k;
 
 	if (!args)
 		return;
 
-	for (i = 0; args[i]; i++)
-		free(args[i]);
+	for (k = 0; args[k]; k++)
+		free(args[k]);
 
 	free(args);
 }
 
 /**
-* parse_line - handle newline character if found, and parses the input line
-* @line: line read from stdin
-* @get: size of line returned from getline
-*
-* Return: output
+* parsing_line - handles character in newline if located and parse input
+* @line: line to be readin the  stdinput
+* @gett: line size returned 
+* Return: output of parsed line
 */
-char **parse_line(char *line, int get)
+char **parsing_line(char *line, int gett)
 {
 	char **input = NULL;
 
-	if (line[get - 1] == '\n')
-		line[get - 1] = '\0';
+	if (line[gett - 1] == '\n')
+		line[gett - 1] = '\0';
 	input = _strtok(line, ' ');
 
 	return (input);

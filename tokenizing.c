@@ -36,7 +36,7 @@ int countingword(char *str, char delimeter)
 
 char **_strtoken(char *str, char delimeter)
 {
-	char *copy = NULL, **words = NULL;
+	char *cpy = NULL, **words = NULL;
 	int k = 0, n = 0, len = 0, total = 0;
 
 	if (str == 0|| *str == 0)
@@ -49,7 +49,7 @@ char **_strtoken(char *str, char delimeter)
 			str++;
 		else
 		{
-			copy = str;
+			cpy = str;
 			while (*str != dilimeter && *str)
 			{
 				len++;
@@ -58,10 +58,10 @@ char **_strtoken(char *str, char delimeter)
 			words[k] = malloc(sizeof(char) * (len + 1));
 			if (!words[k])
 				return (NULL);
-			while (*copy != delimeter && *copy && *copy != '\n')
+			while (*cpy != delimeter && *cpy && *cpy != '\n')
 			{
-				words[k][n] = *copy;
-				copy++;
+				words[k][n] = *cpy;
+				cpy++;
 				n++;
 			}
 			words[k][n] = '\0';

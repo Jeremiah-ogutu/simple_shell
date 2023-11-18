@@ -1,12 +1,11 @@
 #include "shell.h"
 
 /**
- * _putchar - writes the character c to standard output
- * @c: The character to print
- *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
+ * jerlis_print - print character c to std output
+ * @c: character to be printed
+ * Return: 1 success always, -1 error and set errno
  */
+
 void jerlis_print(const char *special_printf)
 {
         write(STDOUT_FILENO, special_printf, strlen(special_printf));
@@ -28,9 +27,9 @@ void unveil_prompt(void)
  */
 void _puts(char *str)
 {
-	int i;
+	int k;
 
-	for (i = 0; str[i] != '\0'; i++)
-		jerlis_print(str[i]);
+	for (k = 0; str[k] != '\0'; k++)
+		jerlis_print(str[k]);
 	jerlis_print('\n');
 }

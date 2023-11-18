@@ -131,7 +131,7 @@ void change_pwd(char *path, char **env, env_t **head)
 	nodes = arr_to_list(head, env);
 	if (!nodes)
 		return;
-	set = _setenv(head, old, 2);
+	set = _setenviron(head, old, 2);
 	if (set < 0)
 	{
 		free_everything(old);
@@ -139,7 +139,7 @@ void change_pwd(char *path, char **env, env_t **head)
 		return;
 	}
 	free_everything(old);
-	set = _setenv(head, current, 2);
+	set = _setenviron(head, current, 2);
 	if (set < 0)
 	{
 		free_everything(current);

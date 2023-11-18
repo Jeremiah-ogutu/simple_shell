@@ -7,12 +7,12 @@
 * Return: name of the value located in env
 */
 
-char *get_environ_variable(char *name, char **env)
+char *get_environ_val(char *name, char **env)
 {
 	int k;
 
 	for (k = 0; env[k]; k++)
-		if (_strcompare(env[k], name, _strlen(name)) == 0)
+		if (_strcmp(env[k], name, _strlen(name)) == 0)
 			return (env[k] + _strlen(name));
 	return (NULL);
 }

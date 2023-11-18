@@ -9,10 +9,10 @@
  * Return: 0 (success), -1 (fail)
  */
 
-int _setenviron(environ_t,**head, char **argv, int args)
+int _setenviron(env_t,**head, char **argv, int args)
 {
 	char *buf1 = NULL, *buf2 = NULL;
-	int indexm = 0;
+	int index = 0;
 
 	if (!head || !*head)
 		return (0);
@@ -22,7 +22,7 @@ int _setenviron(environ_t,**head, char **argv, int args)
 	buf2 = str_concates(buf1, argv[2]);
 	free(buf1);
 
-	indexm = find_indexm_list(*head, argv[1]);
+	index = find_index_list(*head, argv[1]);
 	if (index == 0)
 	{
 		add_node_end(head, buf2);
@@ -30,10 +30,10 @@ int _setenviron(environ_t,**head, char **argv, int args)
 		return (0);
 	}
 
-	if (indexm > 0)
+	if (index > 0)
 	{
-		delete_node_at_indemx(head, indexm);
-		add_node_at_indexm(head, buf2, indexm);
+		delete_node_at_index(head, index);
+		add_node_at_index(head, buf2, index);
 		free(buf2);
 		return (0);
 	}
@@ -49,23 +49,23 @@ int _setenviron(environ_t,**head, char **argv, int args)
  * @argvs: array of strings inclusive of the  parsed line
  * Return: 0 (success), -1 (fail)
  */
-int _unsetenviron(environ_t **head, char **argvs)
+int _unsetenviron(env_t **head, char **argvs)
 {
-	int indexm;
+	int index;
 
 	if (!argv[1])
 		return (-1);
 
-	indexm = find_indexm_list(*head, argv[1]);
+	index = find_index_list(*head, argv[1]);
 	if (indexm == 0 || !head || !*head)
 		return (0);
 else
-		delete_node_at_indexm(head, indexm);
+		delete_node_at_index(head, index);
 
 	return (0);
 }
 /**
- * setenviron_handlerr - handle setenviron,
+ * setenviron_handler - handle setenviron,
  * unsetenviron builtins
  * @argv: array of args from cmd line
  * @head: pointer of  environ_t linked list
@@ -76,20 +76,20 @@ else
  * If its setenviron, call _setenviron, print error on fail
  * If its unsetenviron, call _unsetenviron, print error on fail
  */
-void setenviron_handlerr(char **argv, envi_t **head, int *i, char *program_name)
+void setenviron_handler(char **argv, envi_t **head, int *i, char *program_name)
 {
 	int k = 0, z = 0, args = 0;
-	char *unset_err = "unsetenviron: Too few arguments.\n";
+	char *unset_err = "unsetenviron: few arguments.\n";
 
 	while (argv[args])
 		args++;
 
-	if (!_strcompare(argv[0], "setenviron"))
+	if (!_strcmp(argv[0], "setenviron"))
 	{
 		k = _setenv(head, argv, args);
 		if (k == -1)
 			printin_error_setenviron(i, program_name, argv);
-	} else if (!_strcompare(argv[0], "unsetenviron"))
+	} else if (!_strcmp(argv[0], "unsetenviron"))
 	{
 		z = _unsetenviron(head, argv);
 		if (z == -1)

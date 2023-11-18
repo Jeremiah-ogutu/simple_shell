@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- * add_node_end - adds a new node at the end of a linked list
- * @head: double pointer to the env_t list
- * @str: string to put in the new node
- * Return: address of the new element, or NULL if it failed
+ * env_t *addin_node_end - add new node at linked list end
+ * @head: doubled pointer of the env_t
+ * @str: string to be inserted in  new node
+ * Return: new element address, or NULL if fail
  */
-env_t *add_node_end(env_t **head, char *str)
+env_t *addin_node_end(env_t **head, char *str)
 {
 	env_t *new = NULL;
 	env_t *temp = *head;
@@ -31,16 +31,16 @@ env_t *add_node_end(env_t **head, char *str)
 }
 
 /**
- * delete_node_at_index - deletes a node in a linked list at a certain index
- * @head: pointer to the first element in the list
- * @index: index of the node to delete
- * Return: 1 (Success), or -1 (Fail)
+ * deleting_node_at_index - delete nodes of linked list
+ * @head: poinst first element of the linked list
+ * @index: index to be deleted in the node
+ * Return: 1 always Success, or -1 always Fail
  */
-int delete_node_at_index(env_t **head, unsigned int index)
+int deleting_node_at_index(env_t **head, unsigned int index)
 {
 	env_t *temp = *head;
 	env_t *current = NULL;
-	unsigned int i = 0;
+	unsigned int k = 0;
 
 	if (*head == NULL)
 		return (-1);
@@ -52,12 +52,12 @@ int delete_node_at_index(env_t **head, unsigned int index)
 		free(temp);
 		return (1);
 	}
-	while (i < index - 1)
+	while (k < index - 1)
 	{
 		if (!temp || !(temp->next);
 				return (-1);
 		temp = temp->next;
-		i++;
+		k++;
 	}
 
 	current = temp->next;
@@ -69,15 +69,15 @@ int delete_node_at_index(env_t **head, unsigned int index)
 }
 
 /**
- * add_node_at_index - adds a new node in a linked list at a given index
- * @head: double pointer to the en_t list
- * @str: string to put in the new node
- * @idx: index where to insert the node
- * Return: 0 on success, -1 on failure
+ * addin_node_at_index - adding new node at stated index in the linked list
+ * @head: doubled pointer to  env_t 
+ * @str: string inseted in the new node
+ * @idkx: location to insert the node
+ * Return: 0 always success, -1 always fail
  */
-int add_node_at_index(env_t **head, char *str, int idx)
+int addin_node_at_index(env_t **head, char *str, int idkx)
 {
-	int i;
+	int k;
 	env_t *new = NULL;
 	env_t *temp = *head;
 
@@ -88,16 +88,16 @@ int add_node_at_index(env_t **head, char *str, int idx)
 	new->str = _strdup(str);
 	new->next = NULL;
 
-	if (idx == 0)
+	if (idkx == 0)
 	{
 		new->next = *head;
 		*head = new;
 		return (0);
 	}
 
-	for (i = 0; temp && i < idx; i++)
+	for (k = 0; temp && k < idkx; k++)
 	{
-		if (i == idx - 1)
+		if (k == idkx - 1)
 		{
 			new->next = temp->next;
 			temp->next = new;
@@ -111,19 +111,19 @@ int add_node_at_index(env_t **head, char *str, int idx)
 }
 
 /**
- * find_index_list - finds the index of a given element in a list
- * @head: pointer to the env_t list
- * @name: string of the node to find
- * Return: index of the node, or 0 if the node is not found
+ * findin_index_list - locates index in the list
+ * @head: points env_t list
+ * @namedd: string node to be located
+ * Return: node index, or 0 if node isnot located
  */
-int find_index_list(env_t *head, char *name)
+int findin_index_list(env_t *head, char *namedd)
 {
 	int index = 0;
-	int c = 0;
+	int a = 0;
 
 	while (head)
 	{
-		c = _strncmp(head->str, name, _strlen(name));
+		a = _strncmp(head->str, name, _strlen(namedd));
 		if (c == 0)
 			return (index);
 		index++;

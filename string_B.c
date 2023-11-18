@@ -70,13 +70,13 @@ return (string3);
 }
 
 /*
- * _strcompare - will compare the two string
+ * _strcmp - will compare the two string
  * @string1: string1 to be compared
  * @string2; string2 to be compared
  * Return; 0 if the strings are equal, (< 0) if string1 is less than string2 and (> 0) if string 1 is greater than string2 
 */
 
-int _strcompare(char *string1, char *string2)
+int _strcmp(char *string1, char *string2)
 {
 	while (*string1 == *string2)
 	{
@@ -98,7 +98,7 @@ int _strcompare(char *string1, char *string2)
  * Return: 0 if different, nonzero if same
  */
 
-int _strcompare(char *string1, char *string2, unsigned int n)
+int _strcmp(char *string1, char *string2, unsigned int n)
 {
 	unsigned int k = 0;
 	while (*string1 == *string2 && k < n)
@@ -113,6 +113,3 @@ int _strcompare(char *string1, char *string2, unsigned int n)
 	}
 	return (i != n);
 }
-
-
-

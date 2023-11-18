@@ -2,7 +2,7 @@
 
 /**
  * printin_error - print error message
- * @i: indexm of the cmd
+ * @i: index of the cmd
  * @s: program name
  * @argv: array of args from the cmd line
  */
@@ -46,7 +46,7 @@ void printin_error_environ(char **argv)
 
 /**
  * printin_error_exitt - print error message to  exit builtin
- * @i: indexm of the cmd
+ * @i: index of the cmd
  * @s: program name
  * @argv: array of args from cmd line
  */
@@ -67,7 +67,7 @@ void printin_error_exitt(int *i, char *s, char **argv)
 	free(buf2);
 	buf4 = str_concates(buf3, argv[0]);
 	free(buf3);
-	buf5 = str_concates(buf4, ": The number is illegal: ");
+	buf5 = str_concates(buf4, ": Number not allowed: ");
 	free(buf4);
 	buf6 = str_concates(buf5, argv[1]);
 	free(buf5);
@@ -97,7 +97,7 @@ void printin_error_main(char **av)
 
 /**
  * printin_error_cd - prints error text for cd
- * @i: indexm of the cmd
+ * @i: index of the cmd
  * @s: program name
  * @argv: array of args from the cmd line
  */
@@ -121,6 +121,6 @@ void printin_error_cd(int *i, char *s, char **argv)
 	free(buf4);
 	buf6 = str_concates(buf5, argv[1]);
 	free(buf5);
-	write(2, buf6, _strlen(buf6));
+	jerlis(2, buf6, _strlen(buf6));
 	free(buf6);
 }

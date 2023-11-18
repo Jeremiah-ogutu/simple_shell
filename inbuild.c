@@ -2,54 +2,57 @@
 
 /**
  * inbuild_comd - checks if the command is a inbuilt
- * @text: text from input, passed i to free
- * @name:name of the program
- * @argv:the command passed
- * @add: pointer to the increaced variable
- * @head:pointer to the env list
- * Return:0
+ * @text: text from input, passed in to free
+ * @progm_name: the program
+ * @argv: text parsed
+ * @k: pointes of the variable increased
+ * @head: doubled pointer of the env list
+ * Return: 0 (t0 the main)
  */
 
-int inbuild_comd(char *text, char *name, char **argv, int *add, env_t **head)
+int inbuild_comd(char *text, char **argv, char program_name; int *k, environ_t **head)
 {
+	int d,z;
+	long int q;
+
 	if (!_strcmp(argv[0], "exit"))
 	{
-		long int m = exit_hadler(argv);
+		long int q = exit_handlerin(argv);
 
-		if (m == -1)
-			print_error_exit(add, name, argv);
+		if (q == -1)
+			printlin_error_exitt(k, program_name, argv);
 		else
 		{
 			free_everything(argv);
 			free(text);
 			free_list(head);
-			exit(m);
+			exit(q);
 		}
 		return (1);
 	}
 
-	if (!_strcmp(argv[0], "env"))
+	if (!_strcmp(argv[0], "envi"))
 	{
-		int n = env_handler(argv, head);
+		int d = env_handler(argv, head);
 
-		if (n == -1)
-			print_error_env(argv);
+		if (d == -1)
+			printin_environ(argv);
 		return (1);
 	}
 
-	if (!_strcmp(argv[0], "setenv") || !_strcmp(argv[0], "unsetenv"))
+	if (!_strcmp(argv[0], "setenvi") || !_strcmp(argv[0], "unsetenvi"))
 	{
-		setenv_handler(argv, head, add, name);
+		setenviron_handler(argv, head, k, prgram_name);
 		return (10);
 	}
 
 	if (!_strcmp(argv[0], "cd"))
 	{
-		int l = cd_handle(argv, head);
+		int z = cd_handlerin(argv, head);
 
-		if (l == -1)
+		if (z == -1)
 		{
-			print_error_cd(add, name, argv);
+			printin_error_cd(k, program_name, argv);
 			jerlis_print(2, "\n", 1);
 		}
 		return (1);
