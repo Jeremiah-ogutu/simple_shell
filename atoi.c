@@ -2,35 +2,36 @@
 
 /**
  * _atoik convert the string to integer
- * @strg: string to be converted
+ * @s: string to be converted
+ * description: when first character is '+'
  *
- * Return: the int converted from the string
+ * Return: int converted from the string
  */
-long int _atoik(char *str)
+long int _atoi(char *s)
 {
 	int k, len, m, digit;
 	long int z;
 
 	k = 0;
-	z = 0;
-	len = _strlen(strg);
 	m = 0;
+	len = _strlen(s);
+	z = 0;
 	digit = 0;
 
-	if (str[k] == '+')
+	if (s[k] == '+')
 		k++;
 
 	while (k< len && m == 0)
 	{
-		if (str[k] == '-')
+		if (s[k] == '-')
 			return (-1);
 
-		if (str[k] >= '0' && str[k] <= '9')
+		if (s[k] >= '0' && s[k] <= '9')
 		{
-			digit = str[k] - '0';
+			digit = s[k] - '0';
 			z = z * 10 + digit;
 			m = 1;
-			if (str[k + 1] < '0' || str[k + 1] > '9')
+			if (s[k + 1] < '0' || s[k + 1] > '9')
 				break;
 			m = 0;
 		}
@@ -45,12 +46,13 @@ long int _atoik(char *str)
 }
 
 /**
- * convert - converts the number and base to a string
- * @number: input number
+ * convert - converts the number 
+ * @num: input number
  * @base: input base
+ * description: helps create static buffer
  * Return: resulting string
  */
-char *converting(int number, int base)
+char *convert(int num, int base)
 {
 
 	static char *rep = "0123456789";
@@ -60,9 +62,9 @@ char *converting(int number, int base)
 	ptr = &buffer[49];
 	*ptr = '\0';
 	do {
-		*--ptr = rep[number % base];
-		number /= base;
-	} while (number != 0);
+		*--ptr = rep[num % base];
+		num /= base;
+	} while (num != 0);
 
 	return (ptr);
 }

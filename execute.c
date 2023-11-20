@@ -1,14 +1,16 @@
 #include "shell.h"
 /**
  *execute - Execute a command
- * @input: Array of strings representing the command and its arguments.
+ * @input: Array of strings and arguments.
  * @s: name of the program
- * @i: error in the index
- * @head: Pointer to the env_t linked list representing environment variables.
- * Return: 1 success, else 0 on fail
+ * @m: error in the index
+ * @head: Pointer to the env_t linked list containing variables.
+ * description: creating the child process
+ *
+ * Return: to main looping 1 success, else 0 on failure
 */
 
-int execute(char **input, char *strg, int *i, env_t **head)
+int exec(char **input, char *strg, int *m, env_t **head)
 {
 	struct stat filestat;
 	int status = 0;
@@ -18,21 +20,21 @@ int execute(char **input, char *strg, int *i, env_t **head)
 	child_pid = fork();
 	if (child_pid == -1)
 	{
-		printin_error(i, s, input);
+		print_errorrs(m, s, input);
 		free_everything(input);
 		exit(EXIT_SUCCESS);
 	}
 	if (child_pid == 0)
 	{
-		env = listng_to_arr(*head);
-		if (get_environ_val("PATH=", env)[0] != '/')
+		env = list_to_arras(*head);
+		if (get_env_varis("PATH=", env)[0] != '/')
 			execve(input[0], input, env);
-		exe = path_finding(input, env);
+		exe = path_findin(input, env);
 		if (!exe && !stat(input[0], &filestat))
 		{
 			if (execve(input[0], input, env) == -1)
 			{
-				printin_error(i, s, input);
+				print_errorrs(m, s, input);
 				free_everything(input), free_everything(env);
 				return (0);
 			}
@@ -41,7 +43,7 @@ int execute(char **input, char *strg, int *i, env_t **head)
 		}
 		if (execve(exe, input, env) == -1)
 		{
-			printin_error(i, s, input);
+			print_errorrs(m, s, input);
 			free(exe), free_everything(input), free_everything(env);
 			exit(EXIT_SUCCESS);
 		}
@@ -53,47 +55,47 @@ int execute(char **input, char *strg, int *i, env_t **head)
 }
 
 /**
- * execute - interprets args, printing prom and wait as user input cmd
+ * execute - interprets arguements
+ * printing prompts and wait 
  * @ac: arguments number listed
  * @av: arguments array
- * Return: 0 always successful
+ * description: if arg is passed to execute, print error, exit
+ *
+ * Return: 0 always success
  */
 
 int main(int ac, char *av[])
 {
         size_t len = 0;
-        int cmd_count = 0;
-        int get;
-        char **input = NULL;
-        int *line = NULL;
-        int *program_name = av[0];
+        int cmd_count = 0, get;
+        char **input = NULL; *line = NULL, *program_name = av[0];
         env_t *head = NULL;
 
         if (ac != 1)
         {
-                printin_error_main(av);
+                print_error_execute(av);
                 exit(127);
         }
-        signal(SIGINT,sigi_handlerin);
-        arr_to_listng(&head, environ);
+        signal(SIGINT,sigiint_handlers);
+        arr_to_listn(&head, environ);
         while (1)
         {
                 if (isatty(STDIN_FILENO) != 0 && isatty(STDOUT_FILENO) != 0)
-                        unveil_prompt();
+                        print_promptss();
                 get = getline(&line, &len, stdin);
 if (get < 0)
 		{
 			if (isatty(STDIN_FILENO) != 0 && isatty(STDOUT_FILENO) != 0)
-				jerlis('\n');
+				_putchar('\n');
 			break;
 		}
 		cmd_count++;
 		if (_strcmp(line, "\n") == 0)
 			continue;
-		input = parsing_line(line, get);
+		input = parse_linee(line, get);
 		if (!input)
 			continue;
-		if (inbuild_comd(line, input, program_name, &cmd_count, &head))
+		if (is_builtinns(line, input, program_name, &cmd_count, &head))
 		{
 			free_everything(input);
 			continue;
@@ -101,6 +103,6 @@ if (get < 0)
 		if (!exec(input, program_name, &cmd_count, &head))
 			break;
 	}
-	free_listin(&head), free(line);
+	free_listn(&head), free(line);
 	return (0);
 }
