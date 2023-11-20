@@ -1,35 +1,35 @@
 #include "shell.h"
 
 /**
- * jerlis_print - print character c to std output
- * @c: character to be printed
- * Return: 1 success always, -1 error and set errno
+ * _putchar - print chars c
+ * @c: This is the chars  printed
+ *
+ * Return: if successful
  */
-
-void jerlis_print(const char *special_printf)
+int _putchar(char c)
 {
-        write(STDOUT_FILENO, special_printf, strlen(special_printf));
+	return (write(1, &c, 1));
 }
 
 /**
- * unveil_prompt - promt to be displayed
-*/
-
-void unveil_prompt(void)
+ * print_promptss - helps print the prompt
+ */
+void print_prompt(void)
 {
-        jerlis_print("jerlis_shell$ ");
+	char *s = "$ ";
+
+	write(1, s, 2);
 }
 
-
 /**
- * _puts - prints a string to standard output
- * @str: pointer to the string to print
+ * _puts - prints string
+ * @str: points to string
  */
 void _puts(char *str)
 {
 	int k;
 
 	for (k = 0; str[k] != '\0'; k++)
-		jerlis_print(str[k]);
-	jerlis_print('\n');
+		_putchar(str[k]);
+	_putchar('\n');
 }

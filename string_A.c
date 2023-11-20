@@ -6,13 +6,13 @@
  * Return: string length
  */
 
-int _strlen(char *string)
+int _strlen(char *s)
 {
 	int len = 0;
 
-	if (!string)
+	if (!s)
 		return (0);
-	while (string[len])
+	while (s[len])
 		len++;
 	return (len);
 }
@@ -20,9 +20,9 @@ int _strlen(char *string)
 /*
  * _strcpy - to copy string pointed by src
  * include null byte
- * @dest: points the buffer where the string will be copied
- * @src: the string to be copied
- * Return: points to the dest
+ * @dest: where the string will be copied
+ * @src: string to be copied
+ * Return: points dest
  */
 
 char *_strcpy(char *dest, char *src)

@@ -1,21 +1,21 @@
 #include "shell.h"
 
 /**
- * siginter_handlerin - fails to exit in Ctrl-C case
- * @signal: a signal function is needed to run appropriately
+ * sigint_handlern - no exit with  Ctrl-C
+ * @sig: signal funcs
+ * Description: print line & prompt while ignoring sig
  */
-/
-void sigi_handlerin(int signal)
+void sigint_handlern(int sig)
 {
-	(void)signal;
-	 jerlis_print('\n');
-	 unveil_prompt();
+	(void)sig;
+	 _putchar('\n');
+	 print_prompt();
 	 fflush(stdout);
 }
 
 /**
- * free_everythingg - frees arrays of strings
- * @args: strings array to be freed 
+ * free_everything - frees arrays strings
+ * @args:strings to be freed
  */
 void free_everything(char **args)
 {
@@ -31,17 +31,18 @@ void free_everything(char **args)
 }
 
 /**
-* parsing_line - handles character in newline if located and parse input
-* @line: line to be readin the  stdinput
-* @gett: line size returned 
-* Return: output of parsed line
+* parse_lines - handles newline & parses input 
+* @line: stdin line
+* @get: return acquired line
+*
+* Return: the line parsed
 */
-char **parsing_line(char *line, int gett)
+char **parse_linee(char *line, int get)
 {
 	char **input = NULL;
 
-	if (line[gett - 1] == '\n')
-		line[gett - 1] = '\0';
+	if (line[get - 1] == '\n')
+		line[get - 1] = '\0';
 	input = _strtok(line, ' ');
 
 	return (input);
