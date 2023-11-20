@@ -10,7 +10,7 @@
  * Return: to main looping 1 success, else 0 on failure
 */
 
-int exec(char **input, char *strg, int *m, env_t **head)
+int exec(char **input, char *s, int *m, env_t **head)
 {
 	struct stat filestat;
 	int status = 0;

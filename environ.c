@@ -1,15 +1,17 @@
 #include "shell.h"
 
 /*
- * _setenviron - setting environment variable
- * handle builtin of the setenviron
+ * _setenv - setting environment variable
+ * handle builtinns of the setenv
  * @head: the doubled pointer of the environment linked list
  * @argv: value and name of the variable
  * @args: arguements 
+ * description: returns NULL on an empty list 
+ *
  * Return: 0 (success), -1 (fail)
  */
 
-int _setenviron(env_t,**head, char **argv, int args)
+int _setenv(env_t,**head, char **argv, int args)
 {
 	char *buf1 = NULL, *buf2 = NULL;
 	int index = 0;
@@ -18,22 +20,22 @@ int _setenviron(env_t,**head, char **argv, int args)
 		return (0);
 	if (args != 3)
 		return (-1);
-	buf1 = str_concates(argv[1], "=");
-	buf2 = str_concates(buf1, argv[2]);
+	buf1 = str_concat(argv[1], "=");
+	buf2 = str_concat(buf1, argv[2]);
 	free(buf1);
 
-	index = find_index_list(*head, argv[1]);
+	index = find_index_listn(*head, argv[1]);
 	if (index == 0)
 	{
-		add_node_end(head, buf2);
+		add_node_endd(head, buf2);
 		free(buf2);
 		return (0);
 	}
 
 	if (index > 0)
 	{
-		delete_node_at_index(head, index);
-		add_node_at_index(head, buf2, index);
+		delete_node_at_indexs(head, index);
+		add_node_at_indexs(head, buf2, index);
 		free(buf2);
 		return (0);
 	}
@@ -43,83 +45,85 @@ int _setenviron(env_t,**head, char **argv, int args)
 }
 
 /**
- * _unsetenviron - unsets the  environ variable,
+ * _unsetenv - unsets the  environ variable,
  * handle the unsetenviron builtin
  * @head: the doubled pointer to the env linked list
- * @argvs: array of strings inclusive of the  parsed line
+ * @argvs: array of strings
+ * description: in absence of args
  * Return: 0 (success), -1 (fail)
  */
-int _unsetenviron(env_t **head, char **argvs)
+int _unsetenv(env_t **head, char **argvs)
 {
 	int index;
 
 	if (!argv[1])
 		return (-1);
 
-	index = find_index_list(*head, argv[1]);
-	if (indexm == 0 || !head || !*head)
+	index = find_index_listn(*head, argv[1]);
+	if (index == 0 || !head || !*head)
 		return (0);
 else
-		delete_node_at_index(head, index);
+		delete_node_at_indexs(head, index);
 
 	return (0);
 }
 /**
- * setenviron_handler - handle setenviron,
- * unsetenviron builtins
+ * setenv_handlern - handle setenvironment,
+ * unsetenv builtinns
  * @argv: array of args from cmd line
  * @head: pointer of  environ_t linked list
- * @i: indexm of the cmd
+ * @m: index of the cmd
  * @program_name: program name
  *
  * purpose
- * If its setenviron, call _setenviron, print error on fail
- * If its unsetenviron, call _unsetenviron, print error on fail
+ * If its setenvironment, call _setenv, print error on fail
+ * If its unsetenviron, call _unsetenv, print error on fail
  */
-void setenviron_handler(char **argv, envi_t **head, int *i, char *program_name)
+void setenv_handlern(char **argv, envi_t **head, int *m, char *program_name)
 {
 	int k = 0, z = 0, args = 0;
-	char *unset_err = "unsetenviron: few arguments.\n";
+	char *unset_err = "unsetenv: few arguments.\n";
 
 	while (argv[args])
 		args++;
 
-	if (!_strcmp(argv[0], "setenviron"))
+	if (!_strcmp(argv[0], "setenv"))
 	{
 		k = _setenv(head, argv, args);
 		if (k == -1)
-			printin_error_setenviron(i, program_name, argv);
-	} else if (!_strcmp(argv[0], "unsetenviron"))
+			print_error_setenvi(m, program_name, argv);
+	} else if (!_strcmp(argv[0], "unsetenv"))
 	{
-		z = _unsetenviron(head, argv);
+		z = _unsetenv(head, argv);
 		if (z == -1)
-			jerlis(2, unset_err, _strlen(unset_err));
+			write(2, unset_err, _strlen(unset_err));
 	}
 }
 
 /*
- * print_error_setenviron - writes error text for setenviron
- * @i: indexm of the cmd
+ * print_error_setenvi - writes error text for setenviron
+ * @m: index of the cmd
  * @s: program name
  * @argv: array of args from the cmd line
+ * purpose; contenates strings
  */
 
-void printin_error_setenviron(int *i, char *s, char **argv)
+void print_error_setenvi(int *m, char *s, char **argv)
 {
 	char *buf1 = NULL, *buf2 = NULL, *buf3 = NULL, *buf4 = NULL, *buf5 = NULL;
 	char *number = NULL;
 
-	number = convert(*i, 10);
+	number = convert(*m, 10);
 
-	buf1 = str_concates(s, ": ");
-	buf2 = str_concates(buf1, number);
+	buf1 = str_concat(s, ": ");
+	buf2 = str_concat(buf1, number);
 	free(buf1);
-	buf3 = str_concates(buf2, ": ");
+	buf3 = str_concat(buf2, ": ");
 	free(buf2);
-	buf4 = str_concates(buf3, argv[0]);
+	buf4 = str_concat(buf3, argv[0]);
 	free(buf3);
-	buf5 = str_concates(buf4, ": Bad variable name\n");
+	buf5 = str_concat(buf4, ": substd var name\n");
 	free(buf4);
-	jerlis(2, buf5, _strlen(buf5));
+	write(2, buf5, _strlen(buf5));
 	free(buf5);
 }
