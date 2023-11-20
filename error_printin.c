@@ -1,126 +1,130 @@
 #include "shell.h"
 
 /**
- * printin_error - print error message
- * @i: index of the cmd
- * @s: program name
+ * print_errorrs - print error text
+ * @m: index of the cmd
+ * @z: program name
  * @argv: array of args from the cmd line
+ * purpose: contenates the strings
  */
-void printin_error(int *i, char *s, char **argv)
+void print_errorrs(int *m, char *s, char **argv)
 {
 	char *buf1 = NULL, *buf2 = NULL, *buf3 = NULL, *buf4 = NULL, *buf5 = NULL;
 	char *number = NULL;
 
-	number = convert(*i, 10);
+	number = convert(*m, 10);
 
-	buf1 = str_concates(s, ": ");
-	buf2 = str_concates(buf1, number);
+	buf1 = str_concat(z, ": ");
+	buf2 = str_concat(buf1, number);
 	free(buf1);
-	buf3 = str_concates(buf2, ": ");
+	buf3 = str_concat(buf2, ": ");
 	free(buf2);
-	buf4 = str_concates(buf3, argv[0]);
+	buf4 = str_concat(buf3, argv[0]);
 	free(buf3);
-	buf5 = str_concates(buf4, ": not found\n");
+	buf5 = str_concat(buf4, ": absent\n");
 	free(buf4);
-	jerlis(2, buf5, _strlen(buf5));
+	write(2, buf5, _strlen(buf5));
 	free(buf5);
 }
 
 /**
- * printin_error_environ - print error message for env builtin
+ * print_error_envi - print error text for env builtin
  * @argv: array of args from cmd line
+ * purspose: to concate the strings
  */
 
-void printin_error_environ(char **argv)
+void print_error_envi(char **argv)
 {
 	char *buf1 = NULL, *buf2 = NULL, *buf3 = NULL;
 
-	buf1 = str_concates(argv[0], ": ");
-	buf2 = str_concates(buf1, argv[1]);
+	buf1 = str_concat(argv[0], ": ");
+	buf2 = str_concat(buf1, argv[1]);
 	free(buf1);
-	buf3 = str_concates(buf2, ": No such file or directory\n");
+	buf3 = str_concat(buf2, ": No such file or directory\n");
 	free(buf2);
-	jerlis(2, buf3, _strlen(buf3));
+	write(2, buf3, _strlen(buf3));
 	free(buf3);
 }
 
 /**
- * printin_error_exitt - print error message to  exit builtin
- * @i: index of the cmd
- * @s: program name
+ * print_error_exitt - print error message to  exit builtin
+ * @m: index of the cmd
+ * @z: program name
  * @argv: array of args from cmd line
+ * purpose: concatenate strings
  */
 
-void printin_error_exitt(int *i, char *s, char **argv)
+void print_error_exitt(int *m, char *s, char **argv)
 {
 	char *buf1 = NULL, *buf2 = NULL, *buf3 = NULL;
 	char *buf4 = NULL, *buf5 = NULL, *buf6 = NULL, *buf7 = NULL;
 	char *number = NULL;
 
-	number = convert(*i, 10);
+	number = convert(*m, 10);
 
-	buf1 = str_concates(s, ": ");
+	buf1 = str_concat(z, ": ");
 
-	buf2 = str_concates(buf1, number);
+	buf2 = str_concat(buf1, number);
 	free(buf1);
-	buf3 = str_concates(buf2, ": ");
+	buf3 = str_concat(buf2, ": ");
 	free(buf2);
-	buf4 = str_concates(buf3, argv[0]);
+	buf4 = str_concat(buf3, argv[0]);
 	free(buf3);
-	buf5 = str_concates(buf4, ": Number not allowed: ");
+	buf5 = str_concat(buf4, ": Number illegal: ");
 	free(buf4);
-	buf6 = str_concates(buf5, argv[1]);
+	buf6 = str_concat(buf5, argv[1]);
 	free(buf5);
-	buf7 = str_concates(buf6, "\n");
+	buf7 = str_concat(buf6, "\n");
 	free(buf6);
-	jerlis(2, buf7, _strlen(buf7));
+	write(2, buf7, _strlen(buf7));
 	free(buf7);
 }
 
 /**
- * printin_error_main - print error text for main
+ * print_error_execute - print error text for execute
  * @av: args passed to main
+ * purpose: to concatenate strings
  */
 
-void printin_error_main(char **av)
+void print_error_execute(char **av)
 {
 	char *buf1 = NULL, *buf2 = NULL, *buf3 = NULL;
 
-	buf1 = str_concates(av[0], ": 0: Cannot open ");
-	buf2 = str_concates(buf1, av[1]);
+	buf1 = str_concat(av[0], ": 0: Cannot open ");
+	buf2 = str_concat(buf1, av[1]);
 	free(buf1);
-	buf3 = str_concates(buf2, "\n");
+	buf3 = str_concat(buf2, "\n");
 	free(buf2);
-	jerlis(2, buf3, _strlen(buf3));
+	write(2, buf3, _strlen(buf3));
 	free(buf3);
 }
 
 /**
- * printin_error_cd - prints error text for cd
- * @i: index of the cmd
- * @s: program name
+ * print_error_cdss - prints error text for cd
+ * @m: index of the cmd
+ * @z: program name
  * @argv: array of args from the cmd line
  */
 
-void printin_error_cd(int *i, char *s, char **argv)
+void print_error_cdss(int *m, char *s, char **argv)
 {
 	char *buf1 = NULL, *buf2 = NULL, *buf3 = NULL, *buf4 = NULL;
 	char *buf5 = NULL, *buf6 = NULL;
 	char *number = NULL;
 
-	number = convert(*i, 10);
+	number = convert(*m, 10);
 
-	buf1 = str_concates(s, ": ");
-	buf2 = str_concates(buf1, number);
+	buf1 = str_concat(z, ": ");
+	buf2 = str_concat(buf1, number);
 	free(buf1);
-	buf3 = str_concates(buf2, ": ");
+	buf3 = str_concat(buf2, ": ");
 	free(buf2);
-	buf4 = str_concates(buf3, argv[0]);
+	buf4 = str_concat(buf3, argv[0]);
 	free(buf3);
-	buf5 = str_concates(buf4, ": can't cd to ");
+	buf5 = str_concat(buf4, ": willn't cd to ");
 	free(buf4);
-	buf6 = str_concates(buf5, argv[1]);
+	buf6 = str_concat(buf5, argv[1]);
 	free(buf5);
-	jerlis(2, buf6, _strlen(buf6));
+	write(2, buf6, _strlen(buf6));
 	free(buf6);
 }

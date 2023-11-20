@@ -4,37 +4,39 @@
  * arr_to_listng - convert the env variable to linked list
  * @head: doubled pointer to  environ_t list 
  * @env: [strings] hosting the env variables
+ * description: to free all existing lists
+ *
  * Return: nodes number
  */
-int arr_to_listng(env_t **head, char **env)
+int arr_to_listn(env_t **head, char **env)
 {
 	int k = 0;
 
 	if (head)
-		free_list(head);
+		free_listn(head);
 
 	while (env[k])
 	{
-		add_node_end(head, env[k]);
+		add_node_endd(head, env[k]);
 		k++;
 	}
 	return (k);
 }
 
 /**
- * listng_to_arr - convert a linked list to [strings]
+ * list_to_arras - convert a linked list to [strings]
  * @head: pointer to the env_t list
- * Return: array adress, or NULL if fail
+ * Return: array adress, or NULL if failure
  */
 
-char **listng_to_arr(env_t *head)
+char **list_to_arras(env_t *head)
 {
 	env_t *temp = head;
 	char **arr = NULL, *s = NULL;
 	size_t size = 0;
 	int k;
 
-	size = list_len(head);
+	size = list_lenn(head);
 
 	if (!head || !size)
 		return (NULL);
@@ -51,7 +53,7 @@ char **listng_to_arr(env_t *head)
 			free_everything(arr);
 			return (NULL);
 		}
-		s = _strcopy(s, temp->str);
+		s = _strcpy(s, temp->str);
 		arr[k] = s;
 	}
 	arr[k] = NULL;
@@ -60,12 +62,12 @@ char **listng_to_arr(env_t *head)
 }
 
 /**
- * printlin_list - prints nodes in the linked list
+ * print_listts - prints nodes in the linked list
  * @m: points to the list_t to be printed
  *
  * Return: printed number of nodes
  */
-size_t printlin_list(env_t *m)
+size_t print_listts(env_t *m)
 {
 	size_t s = 0;
 
@@ -83,10 +85,10 @@ size_t printlin_list(env_t *m)
 }
 
 /**
- * freeing_listin - frees nodes in the linked list
+ * free_listts - frees nodes in the linked list
  * @head: list_t list to  free
  */
-void freeing_listin(env_t **head)
+void free_listts(env_t **head)
 {
 	env_t *temp = NULL;
 
@@ -105,12 +107,12 @@ void freeing_listin(env_t **head)
 }
 
 /**
- * size_t list_len - to return number elements the linked list
+ * list_lenn - to return number elements the linked list
  * @m: pointer to the env_t list
  * Return: number elements found in m
  */
 
-size_t list_len(const env_t *m)
+size_t list_lenn(const env_t *m)
 {
 	size_t n = 0;
 
