@@ -37,7 +37,7 @@ char str_concat(char *s1, char *s2)
 	unsigned int k = 0, m = 0, len1 = 0, len2 = 0;
 
 len1 = _strlen(s1)
-len2 = _strlen(g2)
+len2 = _strlen(s2)
 
 s3 = malloc(sizeof(char) * (len1 + len2 + 1));
 if (s == NULL)

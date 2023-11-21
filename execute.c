@@ -76,7 +76,7 @@ int main(int ac, char *av[])
                 print_error_execute(av);
                 exit(127);
         }
-        signal(SIGINT,sigiint_handlers);
+        signal(SIGINT,sigint_handlern;
         arr_to_listn(&head, environ);
         while (1)
         {

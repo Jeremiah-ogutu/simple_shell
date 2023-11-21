@@ -79,7 +79,7 @@ else
  * If its setenvironment, call _setenv, print error on fail
  * If its unsetenviron, call _unsetenv, print error on fail
  */
-void setenv_handlern(char **argv, envi_t **head, int *m, char *program_name)
+void setenv_handlern(char **argv, env_t **head, int *m, char *program_name)
 {
 	int k = 0, z = 0, args = 0;
 	char *unset_err = "unsetenv: few arguments.\n";
