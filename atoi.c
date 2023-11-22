@@ -1,58 +1,58 @@
-#include "shell.h"
+include "shell.h"
 
 /**
- * _atoi - converts a string to an integer
- * @strg: string to be converted
- * Return: the int converted from the string
+ * _atoik convert the string to integer
+ * @s: string to be converted
+ * description: when first character is '+'
+ *
+ * Return: int converted from the string
  */
-long int _atoi(char *strg)
+long int _atoi(char *s)
 {
-	int i;
-	int len;
-	int f;
-	int digit;
-	long int n;
+	int k, len, m, digit;
+	long int z;
 
-	i = 0;
-	n = 0;
-	len = _strlen(strg);
-	f = 0;
+	k = 0;
+	m = 0;
+	len = _strlen(s);
+	z = 0;
 	digit = 0;
 
-	if (strg[i] == '+')
-		i++;
+	if (s[k] == '+')
+		k++;
 
-	while (i < len && f == 0)
+	while (k< len && m == 0)
 	{
-		if (strg[i] == '-')
+		if (s[k] == '-')
 			return (-1);
 
-		if (strg[i] >= '0' && strg[i] <= '9')
+		if (s[k] >= '0' && s[k] <= '9')
 		{
-			digit = strg[i] - '0';
-			n = n * 10 + digit;
-			f = 1;
-			if (strg[i + 1] < '0' || strg[i + 1] > '9')
+			digit = s[k] - '0';
+			z = z * 10 + digit;
+			m = 1;
+			if (s[k + 1] < '0' || s[k + 1] > '9')
 				break;
-			f = 0;
+			m = 0;
 		}
-		i++;
+		k++;
 	}
-	if (f == 0)
+	if (m == 0)
 		return (0);
-	if (n > INT_MAX || n < 0)
+	if (z > INT_MAX || z < 0)
 		return (-1);
 
-	return (n);
+	return (z);
 }
 
 /**
- * convert - converts number and base into string
- * @number: input number
+ * convert - converts the number 
+ * @num: input number
  * @base: input base
- * Return: result string
+ * description: helps create static buffer
+ * Return: resulting string
  */
-char *convert(int number, int base)
+char *convert(int num, int base)
 {
 
 	static char *rep = "0123456789";
@@ -62,9 +62,9 @@ char *convert(int number, int base)
 	ptr = &buffer[49];
 	*ptr = '\0';
 	do {
-		*--ptr = rep[number % base];
-		number /= base;
-	} while (number != 0);
+		*--ptr = rep[num % base];
+		num /= base;
+	} while (num != 0);
 
 	return (ptr);
 }

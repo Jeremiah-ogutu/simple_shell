@@ -1,42 +1,43 @@
 #include "shell.h"
 
 /**
- * sigint_handler - doesn't exit in case of Ctrl-C
- * @sig: required for signal function to run properly
+ * sigint_handlern - no exit with  Ctrl-C
+ * @sig: signal funcs
+ * Description: print line & prompt while ignoring sig
  */
-void sigint_handler(int sig)
+void sigint_handlern(int sig)
 {
 	(void)sig;
-	 jerlis_print('\n');
-	 unveil_prompt();
+	 _putchar('\n');
+	 print_prompt();
 	 fflush(stdout);
 }
 
 /**
- * free_everything - frees arrays of strings
- * @args: array of strings to free
+ * free_everything - frees arrays strings
+ * @args:strings to be freed
  */
 void free_everything(char **args)
 {
-	int i;
+	int k;
 
 	if (!args)
 		return;
 
-	for (i = 0; args[i]; i++)
-		free(args[i]);
+	for (k = 0; args[k]; k++)
+		free(args[k]);
 
 	free(args);
 }
 
 /**
-* parse_line - handle newline character if found, and parses the input line
-* @line: line read from stdin
-* @get: size of line returned from getline
+* parse_lines - handles newline & parses input 
+* @line: stdin line
+* @get: return acquired line
 *
-* Return: output
+* Return: the line parsed
 */
-char **parse_line(char *line, int get)
+char **parse_linee(char *line, int get)
 {
 	char **input = NULL;
 

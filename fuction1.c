@@ -1,39 +1,42 @@
 #include "shell.h"
 
 /**
- * arr_to_list - transforms the environ variable into a linked list
- * @head: double pointer to the env_t list to fill
- * @env: array of strings containing the environment variables
- * Return: Number of nodes in the list
+ * arr_to_listng - convert the env variable to linked list
+ * @head: doubled pointer to  environ_t list 
+ * @env: [strings] hosting the env variables
+ * description: to free all existing lists
+ *
+ * Return: nodes number
  */
-int arr_to_list(env_t **head, char **env)
+int arr_to_listn(env_t **head, char **env)
 {
-	int i = 0;
+	int k = 0;
 
 	if (head)
-		free_list(head);
+		free_listn(head);
 
-	while (env[i])
+	while (env[k])
 	{
-		add_node_end(head, env[i]);
-		i++;
+		add_node_endd(head, env[k]);
+		k++;
 	}
-	return (i);
+	return (k);
 }
 
 /**
- * list_to_arr - transforms a linked list in an array of strings
+ * list_to_arras - convert a linked list to [strings]
  * @head: pointer to the env_t list
- * Return: address of the array, or NULL if it failed
+ * Return: array adress, or NULL if failure
  */
-char **list_to_arr(env_t *head)
+
+char **list_to_arras(env_t *head)
 {
 	env_t *temp = head;
 	char **arr = NULL, *s = NULL;
 	size_t size = 0;
-	int i;
+	int k;
 
-	size = list_len(head);
+	size = list_lenn(head);
 
 	if (!head || !size)
 		return (NULL);
@@ -42,7 +45,7 @@ char **list_to_arr(env_t *head)
 	if (!arr)
 		return (NULL);
 
-	for (i = 0; temp; temp = temp->next, i++)
+	for (k = 0; temp; temp = temp->next, k++)
 	{
 		s = malloc(sizeof(char) * (_strlen(temp->str) + 1));
 		if (!s)
@@ -51,30 +54,30 @@ char **list_to_arr(env_t *head)
 			return (NULL);
 		}
 		s = _strcpy(s, temp->str);
-		arr[i] = s;
+		arr[k] = s;
 	}
-	arr[i] = NULL;
+	arr[k] = NULL;
 
 	return (arr);
 }
 
 /**
- * print_list - prints all the nodes of a linked list
- * @h: pointer to the list_t list to print
+ * print_listts - prints nodes in the linked list
+ * @m: points to the list_t to be printed
  *
- * Return: the number of nodes printed
+ * Return: printed number of nodes
  */
-size_t print_list(env_t *h)
+size_t print_listts(env_t *m)
 {
 	size_t s = 0;
 
-	while (h)
+	while (m)
 	{
-		if (!h->str)
+		if (!m->str)
 			_puts("(nil)");
 		else
-			_puts(h->str);
-		h = h->next;
+			_puts(m->str);
+		m = m->next;
 		s++;
 	}
 
@@ -82,10 +85,10 @@ size_t print_list(env_t *h)
 }
 
 /**
- * free_list - frees all the nodes of a linked list
- * @head: list_t list to be freed
+ * free_listts - frees nodes in the linked list
+ * @head: list_t list to  free
  */
-void free_list(env_t **head)
+void free_listts(env_t **head)
 {
 	env_t *temp = NULL;
 
@@ -104,19 +107,19 @@ void free_list(env_t **head)
 }
 
 /**
- * list_len - returns the number of elements in a linked list
- * @h: pointer to the env_t list
- *
- * Return: number of elements in h
+ * list_lenn - to return number elements the linked list
+ * @m: pointer to the env_t list
+ * Return: number elements found in m
  */
-size_t list_len(const env_t *h)
+
+size_t list_lenn(const env_t *m)
 {
 	size_t n = 0;
 
-	while (h)
+	while (m)
 	{
 		n++;
-		h = h->next;
+		m = m->next;
 	}
 	return (n);
 }

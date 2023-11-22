@@ -1,119 +1,116 @@
 #include "shell.h"
 
 /*
- * _str_duplicate - memory allocation for the duplicate string
+ * _strdups - str Memory allocation
  * @string: string to be duplicated
  * Return: new duplicate string if success or NULL if fail
  */
 
-char *_str_duplicate(char *string)
+char *_strdups(char *str)
 {
-	char *duplicate = NULL;
+	char *dups = NULL;
 	int z, k = 0;
 
 	if (!string)
 		return (NULL);
 	while (string[k])
 		k++;
-	duplicate = malloc(sizeof(char) * k + 1);
+	dups = malloc(sizeof(char) * k + 1);
 	if (!duplicate)
 		return (NULL);
 	for (z = 0; z < k; z++)
-		duplicate[z] = string[z];
-	duplicate[z] = '\0';
-	return (duplicate);
+		dups[z] = str[z];
+	dups[z] = '\0';
+	return (dups);
 }
 
 /*
- * str_concates - to concatenate the strings and allocate memory for new string
- * @string1: first string to be concatenated
- * @string2: second string to be concatenated
+ * str_concat - concatenate string
+ * @s1: first string to be concatenated
+ * @s2: second string to be concatenated
  * Return: pointer to the new string if success or NULL if fail
  */
 
-char *str_concat(char *string1, char *string2)
+char str_concat(char *s1, char *s2)
 {
-	char *string3 = NULL;
+	char *s3 = NULL;
 	unsigned int k = 0, m = 0, len1 = 0, len2 = 0;
 
-len1 = _strlen(string1);
-len2 = _strlen(string2);
+len1 = _strlen(s1)
+len2 = _strlen(s2)
 
-
-string3 = malloc(sizeof(char) * (len1 + len2 + 1));
-if (string3 == NULL)
+s3 = malloc(sizeof(char) * (len1 + len2 + 1));
+if (s == NULL)
 	return (NULL);
 
 k = 0;
 m = 0;
 
-if (string1)
+if (s1)
 {
 	while (k < len1)
 	{
-		string3[k] = string1[k];
+		s3[k] = s1[k];
 		k++;
 	}
 }
 
-if (string2)
+if (s2)
 {
 	while (k < (len1 + len2))
 	{
-		string3[k] = string2[m]
+		s3[k] = s2[m]
 		       k++;
 			m++;
 	}
 }
-string3[k] = '\0';
+s3[k] = '\0';
 
-return (string3);
+return (s3);
 }
 
 /*
- * _strcompare - will compare the two string
+ * _strcmp - will compare the two string
  * @string1: string1 to be compared
  * @string2; string2 to be compared
- * Return; 0 if the strings are equal, (< 0) if string1 is less than string2 and (> 0) if string 1 is greater than string2 
+ * Return; 0 if  equal, (< 0) if string1 is less than string2 and (> 0) if string 1 is greater than string2 
 */
 
-int _strcompare(char *string1, char *string2)
+int _strcmp(char *s1, char *s2)
 {
-	while (*string1 == *string2)
+	while (*s1 == *s2)
 	{
-		if (*string1 == '\0')
+		if (*s1 == '\0')
 		{
 			return (0);
 		}
-		string1++;
-		string2++;
+		s1++;
+		s2++;
 	}
-	return (*string1 - *string2);
+	return (*s1 - *s2);
 }
 
 /*
- * _strcompare - to compare the two strings up n bytes
- * @string2: intial string to be compared against
- * @string2: the second string to be be compared with the intial
+ * _strncmp - to compare the two strings up n bytes
+ * @s2: intial string to be compared against
+ * @s2: the second string to be be compared with the intial
  * @n: bytes to be compared
  * Return: 0 if different, nonzero if same
  */
 
-int _strcompare(char *string1, char *string2, unsigned int n)
+int _strncmp(char *s1, char *s2, unsigned int n)
 {
 	unsigned int k = 0;
-	while (*string1 == *string2 && k < n)
+
+	while (*s1 == *s2 && k < n)
 	{
-		if (*string1 == '\0')
+		if (*s1 == '\0')
 		{
 			return (0);
 		}
-		string1++;
-		string2++;
+		s1++;
+		s2++;
 		k++;
 	}
-	return (k != n);
+return (i != n);
 }
-
-
-
