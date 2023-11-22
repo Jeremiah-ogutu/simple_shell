@@ -42,34 +42,34 @@ char **_strtoken(char *str, char delimeter)
 	if (str == 0|| *str == 0)
 		return (NULL);
 	words = malloc(sizeof(char *) * (total + 1));
-	if (words == NULL);
-	while (*str && k < total)
-	{
-		if (*str == delimeter)
-			str++;
-		else
+	if (words == NULL)
+		while (*str && k < total)
 		{
-			copy = str;
-			while (*str != dilimeter && *str)
-			{
-				len++;
+			if (*str == delimeter)
 				str++;
-			}
-			words[k] = malloc(sizeof(char) * (len + 1));
-			if (!words[k])
-				return (NULL);
-			while (*copy != delimeter && *copy && *copy != '\n')
+			else
 			{
-				words[k][n] = *copy;
-				copy++;
-				n++;
+				copy = str;
+				while (*str != delimeter && *str)
+				{
+					len++;
+					str++;
+				}
+				words[k] = malloc(sizeof(char) * (len + 1));
+				if (!words[k])
+					 return (NULL);
+				while (*copy != delimeter && *copy && *copy != '\n')
+				{
+					words[k][n] = *copy;
+					copy++;
+					n++;
+				}
+				words[k][n] = '\0';
+				k++;
+				n = 0;
+				len = 0;
 			}
-			words[k][n] = '\0';
-			k++;
-			n = 0;
-			len = 0;
 		}
-	}
 	words[k] = NULL;
 	return (words);
 }

@@ -31,16 +31,17 @@ char *_str_duplicate(char *string)
  * Return: pointer to the new string if success or NULL if fail
  */
 
-char str_concates(char *string1, char *string2)
+char *str_concat(char *string1, char *string2)
 {
 	char *string3 = NULL;
 	unsigned int k = 0, m = 0, len1 = 0, len2 = 0;
 
-len1 = _strlen(string1)
-len2 = _strlen(string2)
+len1 = _strlen(string1);
+len2 = _strlen(string2);
+
 
 string3 = malloc(sizeof(char) * (len1 + len2 + 1));
-if (string == NULL)
+if (string3 == NULL)
 	return (NULL);
 
 k = 0;
@@ -111,7 +112,7 @@ int _strcompare(char *string1, char *string2, unsigned int n)
 		string2++;
 		k++;
 	}
-	return (i != n);
+	return (k != n);
 }
 
 

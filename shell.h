@@ -6,7 +6,29 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <sys/wait.h>
+#include <limits.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <signal.h>
+#include <errno.h>
 
+
+
+
+
+/**
+ * struct list_s - singly linked list
+ * @str: string - (malloc'ed string)
+ * @next: points to the next node
+ *
+ * Description: singly linked list node structure
+ */
+typedef struct list_s
+{
+    char *str;
+    struct list_s *next;
+} env_t;
 
 long int _atoi(char *strg);
 char *convert(int number, int base);
@@ -34,21 +56,22 @@ char *_strcopy(char *dest, char *source);
 char *_str_duplicate(char *string);
 char str_concates(char *string1, char *string2);
 int _strcompare(char *string1, char *string2);
-int _strcompare(char *string1, char *string2, unsigned int n);
+int _strncompare(char *string1, char *string2, unsigned int n);
 int countingword(char *str, char delimeter);
 char **_strtoken(char *str, char delimeter);
 char *path_finding(char **s, char **env);
 char **gett_environ(char *name, char **env);
 char *get_environ_variable(char *name, char **env);
-void printin_error_setenviron(int *i, char *s, char **argv);
-void setenviron_handlerr(char **argv, envi_t **head, int *i, char *program_name);
-int _unsetenviron(environ_t **head, char **argvs);
-int _setenviron(environ_t,**head, char **argv, int args);
-void printin_error(int *i, char *s, char **argv)
-void printin_error_environ(char **argv);
-void printin_error_exitt(int *i, char *s, char **argv);
-void printin_error_main(char **av);
-void printin_error_cd(int *i, char *s, char **argv);
+void print_error_setenviron(int *i, char *s, char **argv);
+void setenviron_handler(char **argv, env_t **head, int *i, char *program_name);
+int unsetenviron(env_t **head, char **argvs);
+int setenviron(env_t **head, char **argv, int args);
+void print_error(int *i, char *s, char **argv);
+void print_error_environ(char **argv);
+void print_error_exit(int *i, char *s, char **argv);
+void print_error_main(char **av);
+void print_error_cd(int *i, char *s, char **argv);
+
 void jerlis_print(const char *special_printf);
 void unveil_prompt(void);
 void _puts(char *str);

@@ -47,7 +47,7 @@ int main(int ac, char *av[])
 			free_everything(input);
 			continue;
 		}
-		if (!exec(input, progName, &cmd_count, &head))
+		if (!execute(input, progName, &cmd_count, &head))
 			break;
 	}
 	free_list(&head), free(line);

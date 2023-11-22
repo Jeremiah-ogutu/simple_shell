@@ -51,8 +51,8 @@ int env_handler(char **cm, env_t **head)
 {
 	if (cm[1] == NULL)
 	{
-		print_list(*head)
-			return (0);
+		print_list(*head);
+		return (0);
 	}
 	return (-1);
 }
@@ -97,7 +97,7 @@ int cd_handler(char **argv, env_t **head)
 	else
 	{
 		change_pwd(argv[1], env, head);
-		free_enything(env);
+		free_everything(env);
 		return (1);
 	}
 	return (0);
@@ -131,14 +131,14 @@ void change_pwd(char *path, char **env, env_t **head)
 	nodes = arr_to_list(head, env);
 	if (!nodes)
 		return;
-	set = _setenv(head, old, 2);
+	set = _setenv(head, prev, 2);
 	if (set < 0)
 	{
-		free_everything(old);
+		free_everything(prev);
 		free_everything(current);
 		return;
 	}
-	free_everything(old);
+	free_everything(prev);
 	set = _setenv(head, current, 2);
 	if (set < 0)
 	{
